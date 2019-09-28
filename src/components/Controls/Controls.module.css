@@ -1,0 +1,36 @@
+/* your css code */
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  box-shadow: 0px 7px 21px -4px rgba(0, 0, 0, 0.75);
+  background-color: #062c56;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-bottom: 30px;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  width: 186px;
+  height: 40px;
+  border: none;
+  border-radius: 3px;
+  background-color: #3884ff;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+input {
+  width: 263px;
+  border-radius: 3px;
+  border: none;
+  margin-right: 20px;
+  font-size: 18px;
+  padding-left: 10px;
+}

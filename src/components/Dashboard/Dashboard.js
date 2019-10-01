@@ -18,9 +18,14 @@ class Dashboard extends Component {
 
   componentDidMount() {
     const persistedTransaction = localStorage.getItem('transactions');
-    if (persistedTransaction) {
+    const initialBalance = localStorage.getItem('balance');
+    if (persistedTransaction && initialBalance) {
+      const balance = JSON.parse(initialBalance);
       this.setState({
         transactions: JSON.parse(persistedTransaction),
+        balance: balance.balance,
+        deposit: balance.deposit,
+        withdraw: balance.withdraw,
       });
     }
   }
@@ -28,7 +33,14 @@ class Dashboard extends Component {
   componentDidUpdate(prevProp) {
     const { transactions } = this.state;
     if (prevProp.transactions !== transactions) {
+      const { balance, deposit, withdraw } = this.state;
+      const setBalance = {
+        balance,
+        deposit,
+        withdraw,
+      };
       localStorage.setItem('transactions', JSON.stringify(transactions));
+      localStorage.setItem('balance', JSON.stringify(setBalance));
     }
   }
 

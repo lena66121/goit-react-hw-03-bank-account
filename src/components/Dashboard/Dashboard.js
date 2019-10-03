@@ -12,8 +12,6 @@ class Dashboard extends Component {
     balance: 0,
     transactions: [],
     value: '',
-    deposit: 0,
-    withdraw: 0,
   };
 
   componentDidMount() {
@@ -24,8 +22,6 @@ class Dashboard extends Component {
       this.setState({
         transactions: JSON.parse(persistedTransaction),
         balance: balance.balance,
-        deposit: balance.deposit,
-        withdraw: balance.withdraw,
       });
     }
   }
@@ -33,11 +29,9 @@ class Dashboard extends Component {
   componentDidUpdate(prevProp) {
     const { transactions } = this.state;
     if (prevProp.transactions !== transactions) {
-      const { balance, deposit, withdraw } = this.state;
+      const { balance } = this.state;
       const setBalance = {
         balance,
-        deposit,
-        withdraw,
       };
       localStorage.setItem('transactions', JSON.stringify(transactions));
       localStorage.setItem('balance', JSON.stringify(setBalance));
@@ -81,17 +75,12 @@ class Dashboard extends Component {
   };
 
   updateBalance = (name, value) => {
-    if (name === 'deposit') {
-      this.setState(prevValue => ({
-        deposit: prevValue.deposit + value,
-        balance: prevValue.balance + value,
-      }));
-    } else {
-      this.setState(prevValue => ({
-        withdraw: prevValue.withdraw + value,
-        balance: prevValue.balance - value,
-      }));
-    }
+    this.setState(prevValue => ({
+      balance:
+        name === 'deposit'
+          ? prevValue.balance + value
+          : prevValue.balance - value,
+    }));
   };
 
   reset = () => {
@@ -101,7 +90,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { balance, withdraw, deposit, transactions } = this.state;
+    const { balance, transactions } = this.state;
     const { value } = this.state;
     return (
       <div className={styles.dashboard}>
@@ -111,7 +100,8 @@ class Dashboard extends Component {
           handleClick={this.handleClick}
           onChange={this.handleChange}
         />
-        <Balance balance={balance} withdraw={withdraw} deposit={deposit} />
+        {/* <Balance balance={balance} withdraw={withdraw} deposit={deposit} /> */}
+        <Balance balance={balance} transactions={transactions} />
         <TransactionHistory transactions={transactions} />
       </div>
     );

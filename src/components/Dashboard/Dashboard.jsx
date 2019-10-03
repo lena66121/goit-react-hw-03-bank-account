@@ -100,7 +100,6 @@ class Dashboard extends Component {
           handleClick={this.handleClick}
           onChange={this.handleChange}
         />
-        {/* <Balance balance={balance} withdraw={withdraw} deposit={deposit} /> */}
         <Balance balance={balance} transactions={transactions} />
         <TransactionHistory transactions={transactions} />
       </div>
